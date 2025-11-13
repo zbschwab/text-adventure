@@ -3,6 +3,7 @@ package edu.grinnell.csc207.lootgenerator;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
 public class LootGenerator {
@@ -16,21 +17,31 @@ public class LootGenerator {
         public String level;
         public String tc;
 
-        public Monster(String monsterClass, String tc) {
+        public Monster(String monsterClass, String type, String level, String tc) {
             this.monsterClass = monsterClass;
-            this.type = "Cow";
-            this.level = "90";
+            this.type = type;
+            this.level = level;
             this.tc = tc;
+        }
+
+        @Override
+        public String toString() {  // TEST
+            return monsterClass + ", " + type + ", " + level + ", " + tc;
         }
     }
 
-    public class TreasureClass {
+    public static class TreasureClass {
         String name;
-        ArrayList<String> items;
+        String[] items;
 
-        public TreasureClass(String name, ArrayList<String> items) {
+        public TreasureClass(String name, String[] items) {
             this.name = name;
             this.items = items;
+        }
+
+        @Override
+        public String toString() {  // TEST
+            return name + ", " + items[0] + ", " + items[1] + ", " + items[2] + "\n";
         }
     }
 
@@ -89,7 +100,7 @@ public class LootGenerator {
         }
     }
 
-    public static void loadMonsters(String filePath) throws FileNotFoundException {
+    public static ArrayList<Monster> loadMonsters(String filePath) throws FileNotFoundException {
         ArrayList<Monster> monsters = new ArrayList<>();
         Scanner s = new Scanner(new File(filePath)).useDelimiter("\t");
 
@@ -97,15 +108,50 @@ public class LootGenerator {
             String line = s.nextLine();
             String[] row_data = line.split("\t");
 
-            Monster m = new Monster(row_data[0], row_data[3]);
+            Monster m = new Monster(row_data[0], row_data[1], row_data[2], row_data[3]);
             monsters.add(m);
         }
     
         s.close();
+        System.out.println(monsters.toString());  // TEST
+        return monsters;
     }
 
-    public static void main(String[] args) {
+    public static void loadTCs(String filePath) throws FileNotFoundException {
+        HashMap<String, TreasureClass> TCmap = new HashMap<>();
+        Scanner s = new Scanner(new File(filePath)).useDelimiter("\t");
+
+        while (s.hasNextLine()) {
+            String line = s.nextLine();
+            String[] row_data = line.split("\t");
+            String[] item_data = new String[3];
+            System.arraycopy(row_data, 1, item_data, 0, 3);
+
+            TreasureClass tc = new TreasureClass(row_data[0], item_data);
+            TCmap.put(row_data[0], tc);
+        }
+
+        s.close();
+        System.out.println(TCmap.toString());  // TEST
+    }
+
+    public static void main(String[] args) throws FileNotFoundException {
         System.out.println("This program kills monsters and generates loot!");
-        // TOOD: Implement me!
+    
+
+        // testing
+        ArrayList<Monster> monsters = loadMonsters(DATA_SET + "/monstats.txt");
+        loadTCs(DATA_SET + "/TreasureClassEx.txt");
+
+        Scanner s = new Scanner(System.in);
+        System.out.print("Fight again [y/n]? ");
+        if ("y".equalsIgnoreCase(s.next())) {
+            // regenerate
+        } else if ("n".equalsIgnoreCase(s.next())) {
+            // exit program
+        } else {
+            System.out.print("Fight again [y/n]? ");
+        }
+        
     }
 }
