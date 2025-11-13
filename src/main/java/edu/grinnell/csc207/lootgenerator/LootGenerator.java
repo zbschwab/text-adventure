@@ -1,13 +1,16 @@
 package edu.grinnell.csc207.lootgenerator;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class LootGenerator {
     /** The path to the dataset (either the small or large set). */
     private static final String DATA_SET = "data/small";
 
     // pre-loaded objects
-    public class Monster {
+    public static class Monster {
         public String monsterClass;
         public String type;
         public String level;
@@ -79,11 +82,26 @@ public class LootGenerator {
         Suffix suffix;
 
         public Item(BaseItem base, int defense, Prefix prefix, Suffix suffix) {
-            this.base = base; 
+            this.base = base;
             this.defense = defense;
             this.prefix = prefix;
             this.suffix = suffix;
         }
+    }
+
+    public static void loadMonsters(String filePath) throws FileNotFoundException {
+        ArrayList<Monster> monsters = new ArrayList<>();
+        Scanner s = new Scanner(new File(filePath)).useDelimiter("\t");
+
+        while (s.hasNextLine()) {
+            String line = s.nextLine();
+            String[] row_data = line.split("\t");
+
+            Monster m = new Monster(row_data[0], row_data[3]);
+            monsters.add(m);
+        }
+    
+        s.close();
     }
 
     public static void main(String[] args) {
