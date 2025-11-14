@@ -4,7 +4,10 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.Random;
 import java.util.Scanner;
+
+import edu.grinnell.csc207.lootgenerator.LootGenerator.TreasureClass;
 
 public class LootGenerator {
     /** The path to the dataset (either the small or large set). */
@@ -45,6 +48,25 @@ public class LootGenerator {
         }
     }
 
+    public static class BaseItem {
+        String name;
+        int minac;
+        int maxac;
+        int defense;
+
+        public BaseItem(String name, int minac, int maxac) {
+            this.name = name;
+            this.minac = minac;
+            this.maxac = maxac;
+            this.defense = 0;
+        }
+
+        @Override
+        public String toString() { // TEST
+            return name + ", " + minac + ", " + maxac + "\n";
+        }
+    }
+
     public static class Prefix {
         String name;
         String mod1code;
@@ -73,38 +95,7 @@ public class LootGenerator {
         }
     }
 
-    public static class BaseItem {
-        String name;
-        int minac;
-        int maxac;
-
-        public BaseItem(String name, int minac, int maxac) {
-            this.name = name;
-            this.minac = minac;
-            this.maxac = maxac;
-        }
-
-        @Override
-        public String toString() { // TEST
-            return name + ", " + minac + ", " + maxac + "\n";
-        }
-    }
-
-    // generated objects
-    public class Item {
-        BaseItem base;
-        int defense;
-        Prefix prefix;
-        Suffix suffix;
-
-        public Item(BaseItem base, int defense, Prefix prefix, Suffix suffix) {
-            this.base = base;
-            this.defense = defense;
-            this.prefix = prefix;
-            this.suffix = suffix;
-        }
-    }
-
+    // data loading methods
     public static ArrayList<Monster> loadMonsters(String filePath) throws FileNotFoundException {
         ArrayList<Monster> monsters = new ArrayList<>();
         Scanner s = new Scanner(new File(filePath)).useDelimiter("\t");
@@ -141,7 +132,7 @@ public class LootGenerator {
         return TCmap;
     }
 
-    public static HashMap<String, BaseItem> loadBaseItems(String filePath) throws FileNotFoundException {
+    public static HashMap<String, BaseItem> loadBaseMap(String filePath) throws FileNotFoundException {
         HashMap<String, BaseItem> itemMap = new HashMap<>();
         Scanner s = new Scanner(new File(filePath)).useDelimiter("\t");
 
@@ -192,10 +183,85 @@ public class LootGenerator {
         return suffixes;
     }
 
-    public static void main(String[] args) throws FileNotFoundException {
-        System.out.println("This program kills monsters and generates loot!");
+    private ArrayList<Monster> monsters;
+    private HashMap<String, TreasureClass> TCmap;
+    private HashMap<String, BaseItem> baseMap;
+    private ArrayList<Prefix> prefixes;
+    private ArrayList<Suffix> suffixes;
 
-        // randomly pick monster
+    private Random rand = new Random();
+
+    public LootGenerator() throws FileNotFoundException {
+        monsters = loadMonsters(DATA_SET + "/monstats.txt");
+        TCmap = loadTCs(DATA_SET + "/TreasureClassEx.txt");
+        baseMap = loadBaseMap(DATA_SET + "/armor.txt");
+        prefixes = loadPrefixes(DATA_SET + "/MagicPrefix.txt");
+        suffixes = loadSuffixes(DATA_SET + "/MagicSuffix.txt");
+    }
+
+    // game mechanics methods
+    public Monster pickMonster(ArrayList<Monster> monsters) {
+        return monsters.get(rand.nextInt(monsters.size()));
+    }
+
+    public BaseItem getTC(Monster monster, HashMap<String, TreasureClass> TCmap, HashMap<String, BaseItem> baseMap) {
+        // find tc, randomly look up a value
+        // if it exists in baseMap, return it, else recurse
+        TreasureClass tc = TCmap.get(monster.tc);
+        String tc_name = tc.items[rand.nextInt(tc.items.length)];
+
+        return getTCHelper(tc_name, TCmap, baseMap);
+    }
+
+    public BaseItem getTCHelper(String tc_name, HashMap<String, TreasureClass> TCmap, HashMap<String, BaseItem> baseMap) {
+        if (baseMap.containsKey(tc_name)) {
+            return baseMap.get(tc_name);
+        } else {
+            TreasureClass tc = TCmap.get(tc_name);
+            String tc_next = tc.items[rand.nextInt(tc.items.length)];
+            return getTCHelper(tc_next, TCmap, baseMap);
+        }
+    }
+
+    public BaseItem getBaseStats(BaseItem b) {
+        int pts = rand.nextInt(b.minac, b.maxac + 1);
+        b.defense += pts;
+        return b;
+    }
+
+    public void getAffix(BaseItem b) {
+        int r = rand.nextInt(4);
+
+        if (r%2 == 0) {
+            return;
+        } else if (r == 1) {
+            int pr = rand.nextInt(prefixes.size());
+            Prefix p = prefixes.get(pr);
+        } else {
+            int sr = rand.nextInt(suffixes.size());
+            Suffix s = suffixes.get(sr);
+        }
+    }
+
+    public static void main(String[] args) throws FileNotFoundException {
+        LootGenerator gen = new LootGenerator();
+
+        boolean running = true;
+        while (running) {
+            Monster monster = gen.pickMonster(gen.monsters);
+
+            System.out.println("Fighting " + monster);
+            System.out.println("You have slain " + monster + "!");
+            System.out.println(monster + " dropped: \n");
+
+            BaseItem baseItem = gen.getTC(monster, gen.TCmap, gen.baseMap);
+            baseItem = gen.getBaseStats(baseItem);
+            System.out.println(baseItem.name);
+            System.out.println("Defense: " + baseItem.defense);
+
+
+        }
+
         // look up monster's TC in TCmap --> base item
         // look up base item in armor.txt
         // calculate defense from minac-maxac
@@ -204,9 +270,6 @@ public class LootGenerator {
         // print out monster, item name, base stats, affix stats
 
         // testing
-        ArrayList<Monster> monsters = loadMonsters(DATA_SET + "/monstats.txt");
-        loadTCs(DATA_SET + "/TreasureClassEx.txt");
-        loadBaseItems(DATA_SET + "/armor.txt");
 
         Scanner s = new Scanner(System.in);
         System.out.print("Fight again [y/n]? ");
