@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class LootGenerator {
     /** The path to the dataset (either the small or large set). */
-    private static final String DATA_SET = "data/small";
+    private static final String DATA_SET = "data/large";
 
     // pre-loaded objects
     public static class Monster {
@@ -366,6 +366,15 @@ public class LootGenerator {
 
             System.out.print("\nFight again [y/n]? ");
             while (true) {
+                // for burn testing
+                // int r = gen.rand.nextInt(5);
+                // String input;
+                // if (r != 0) {
+                //     input = "y";
+                // } else {
+                //     input = "badinput";
+                // }
+                // comment next line out for burn testing
                 String input = s.next();
                 if ("y".equalsIgnoreCase(input)) {
                     break;
