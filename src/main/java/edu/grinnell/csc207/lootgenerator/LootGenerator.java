@@ -127,7 +127,6 @@ public class LootGenerator {
         }
 
         s.close();
-        System.out.println(monsters.toString()); // TEST
         return monsters;
     }
 
@@ -146,7 +145,6 @@ public class LootGenerator {
         }
 
         s.close();
-        System.out.println(TCmap.toString()); // TEST
         return TCmap;
     }
 
@@ -163,7 +161,6 @@ public class LootGenerator {
         }
 
         s.close();
-        System.out.println(itemMap.toString()); // TEST
         return itemMap;
     }
 
@@ -281,9 +278,9 @@ public class LootGenerator {
         while (running) {
             Monster monster = gen.pickMonster(gen.monsters);
 
-            System.out.println("Fighting " + monster);
-            System.out.println("You have slain " + monster + "!");
-            System.out.println(monster + " dropped: \n");
+            System.out.println("\nFighting " + monster.monsterClass);
+            System.out.println("You have slain " + monster.monsterClass + "!");
+            System.out.println(monster.monsterClass + " dropped: \n");
 
             BaseItem baseItem = gen.getTC(monster, gen.TCmap, gen.baseMap);
             baseItem = gen.getBaseStats(baseItem);
@@ -297,10 +294,14 @@ public class LootGenerator {
                 System.out.println(modItem.modval + " " + modItem.modcode);
             }
 
-            System.out.print("Fight again [y/n]? ");
-            while (!"y".equalsIgnoreCase(s.next())) {
-                if ("n".equalsIgnoreCase(s.next())) {
+            System.out.print("\nFight again [y/n]? ");
+            while (true) {
+                String input = s.next();
+                if ("y".equalsIgnoreCase(input)) {
+                    break;
+                } else if ("n".equalsIgnoreCase(input)) {
                     running = false;
+                    break;
                 } else {
                     System.out.print("Fight again [y/n]? ");
                 }
