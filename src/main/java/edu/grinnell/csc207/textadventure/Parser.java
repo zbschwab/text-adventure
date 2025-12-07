@@ -11,15 +11,15 @@ public class Parser {
         }
     }
 
-    public static void parse(String input) {
+    public static Action parse(String input) {
         String[] phrase = input.split("\\s+");
         if (phrase.length >= 2) {
             String verb = phrase[0];
             String subject = phrase[phrase.length - 1];
-            Action action = new Action(verb, subject);
-            System.out.println("\naction created: " + action.verb + ", " + action.subject); // for debugging
+            return new Action(verb, subject);
         } else {    
-            System.out.println("\nCommand is too short. Try something longer.");
+            System.err.println("\nCommand is too short. Try something longer.");
+            return null;
         }
     }
 }

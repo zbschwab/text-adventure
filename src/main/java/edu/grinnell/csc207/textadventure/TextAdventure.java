@@ -2,6 +2,8 @@ package edu.grinnell.csc207.textadventure;
 
 import java.util.Scanner;
 
+import edu.grinnell.csc207.textadventure.Parser.Action;
+
 public class TextAdventure {
     public static class Condition {
         public boolean bound;
@@ -58,7 +60,16 @@ public class TextAdventure {
                 case "help" -> System.out.println(instructions);
                 case "exit" -> running = false;
 
-                default -> Parser.parse(input);
+                default -> {
+                    Action act = null;
+                    while (act == null) {
+                        act = Parser.parse(input);
+                        if (act == null) {
+                            System.out.print("\n> ");
+                            input = in.nextLine().trim();
+                        }
+                    }
+                }
             }
         }
         in.close();
