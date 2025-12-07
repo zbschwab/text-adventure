@@ -3,11 +3,24 @@ package edu.grinnell.csc207.textadventure;
 import java.util.Scanner;
 
 public class TextAdventure {
+    public static class Condition {
+        public boolean bound;
+        public boolean dizzy;
+        public boolean calm;
+        public boolean frightened;
+
+        public Condition() {
+            bound = true;
+            dizzy = true;
+            calm = false;
+            frightened = false;
+        }
+    }
 
     public static class PlayerInfo {
         public Room room;
         public Condition condition;
-        private Inventory inventory;
+        public Inventory inventory;
 
         public PlayerInfo(Room room, Condition cond, Inventory inv) {
             this.room = room;
@@ -15,6 +28,9 @@ public class TextAdventure {
             this.inventory = inv;
         }
     }
+
+    Condition playerCond = new Condition();
+    Condition otherCond = new Condition();
 
     public static void main(String[] args) {
         String intro = """
@@ -26,11 +42,10 @@ public class TextAdventure {
                 a text adventure. type 'help' for guidance. """;
         String instructions = """
 
-                HINTS: give simple commands. 
+                HINTS: give simple sentence commands. 
+                starting with a verb and ending with a subject works best; ex. "Look at the water"
                 perceive your environment using verbs like {LOOK, LISTEN, TOUCH, SMELL, TASTE}.
-                interact with your environment using verbs like {CHECK, HOLD, }.
-                wait in silence by pressing ENTER. 
-                ponder matters by using THINK.
+                interact with your environment using verbs like {CHECK, HOLD, SING, HIT}.
                 end the game with EXIT. """;
 
         Scanner in = new Scanner(System.in);
@@ -43,7 +58,7 @@ public class TextAdventure {
                 case "help" -> System.out.println(instructions);
                 case "exit" -> running = false;
 
-                default -> System.out.println("\nTry something else.");
+                default -> Parser.parse(input);
             }
         }
         in.close();
