@@ -22,9 +22,9 @@ public class GameState {
     public Condition condition = new Condition();
     public List<String> inventory;
 
-    public GameState(Room room, Condition cond) {
+    public GameState(Room room) {
         this.currentRoom = room;
-        this.condition = cond;
+        this.condition = new Condition();
         this.inventory = new ArrayList<>();
     }
 }
