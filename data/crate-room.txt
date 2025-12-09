@@ -1,0 +1,11 @@
+LOOK_DIZZY:
+Your head pounds. You can't tell if you're dehydrated or coming down from something.
+
+LOOK_ENTRANCE:
+You're folded up in an awkward position. Half your body's gone numb, your head feels fuzzy, and everything smells like tar.
+
+LOOK_EXIT:
+You push the hastily nailed-on box lid up and away. It crashes to the floor. You realize you were in a wooden shipping crate; when you stand up, it seems even smaller from the outside.
+
+LOOK_AROUND:
+You feel coarse, splintery wood grain beneath your fingers. You're in a sealed box of some sort. Hope you're not claustrophobic.

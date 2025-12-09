@@ -1,0 +1,11 @@
+LOOK_CRATE:
+A wooden shipping crate, with the top lying a few feet away.
+
+LOOK_ENTRANCE:
+Concrete floor, walls, ceiling. You think you might be in a basement.
+
+LOOK_EXIT:
+A rusted metal panel on the ceiling, just above arms reach.
+
+LOOK_AROUND:
+A small rectangular window at the top of a wall fills the room with dim light. The floor is stained, and there's a collection of odd metal circles in the corner.
