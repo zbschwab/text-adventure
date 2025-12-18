@@ -7,16 +7,18 @@ public class GameState {
     public static class Condition {
         public boolean bound;
         public boolean dizzy;
-        public boolean calm;
-        public boolean frightened;
         public boolean acclimated;
+
+        public boolean angelCalm;
+        public boolean angelFrightened;
 
         public Condition() {
             bound = true;
             dizzy = true;
-            calm = false;
-            frightened = false;
             acclimated = false;
+
+            angelCalm = false;
+            angelFrightened = false;
         }
     }
 
