@@ -9,6 +9,11 @@ public class Parser {
             this.verb = verb;
             this.subject = subject;
         }
+
+        @Override
+        public String toString() {
+            return this.verb + " " + this.subject;
+        }
     }
 
     public static Action parse(String input) {
