@@ -8,7 +8,9 @@ public class Basement extends Room {
     }
 
     @Override
-    public void route(Action act, GameState state) {
-        System.out.println(text.get(keyBuilder(act)));
+    public Action route(Action act, GameState state) {
+        System.out.println(act.verb + ", " + act.subject); // debug
+        
+        return act;
     }
 }
