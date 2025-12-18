@@ -7,6 +7,7 @@ import edu.grinnell.csc207.textadventure.Parser.Action;
 public class TextAdventure {
     
 
+    @SuppressWarnings("ConvertToTryWithResources")
     public static void main(String[] args) {
         String intro = """
                 \n\n\n
@@ -18,10 +19,13 @@ public class TextAdventure {
         String instructions = """
 
                 HINTS: give simple sentence commands.
-                starting with a verb and ending with a subject works best; ex. "Look at the water"
-                perceive your environment using verbs like {LOOK, LISTEN, TOUCH, SMELL, TASTE}.
-                interact with your environment using verbs like {CHECK, HOLD, SING, HIT}.
-                end the game with Q. """;
+                <verb>..other text..<subject>
+                works best (ex. "Look at the water").
+                you can percieve your environment with verbs like { LOOK, LISTEN, TOUCH, SMELL, TASTE }
+                you can interact with your environment with verbs like { GO, HOLD, SING, HIT }.
+                
+                ask for help by typing 'help'.
+                end the game by typing 'q'. """;
 
         Scanner in = new Scanner(System.in);
         GameState state = new GameState(new Crate());
@@ -44,14 +48,11 @@ public class TextAdventure {
             }
 
             Action act = Parser.parse(input);
-            while (act == null) {
-                System.out.print("\n> ");
-                input = in.nextLine().trim();
-                act = Parser.parse(input);
+            
+            if (act != null) {
+                System.out.print("\n");
+                state.currentRoom.resolve(act, state);
             }
-
-            Room room = state.currentRoom;
-            room.route(act, state);
         }
         in.close();
     }
