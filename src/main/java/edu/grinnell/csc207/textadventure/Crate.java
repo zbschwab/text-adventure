@@ -8,20 +8,26 @@ public class Crate extends Room {
     }
 
     @Override
-    public void route(Action act, GameState state) {
-        System.out.println(act.verb + ", " + act.subject);
+    public Action route(Action act, GameState state) {
+        System.out.println(act.verb + ", " + act.subject); // debug
 
-        // if (act.verb.equals("check") && act.subject.equals("pocket")) {
-
-        // }
+        switch (act.toString()) {
+            case "check pocket", "check pockets" -> {
+                if (state.cond.bound) {
+                    return new Action("check", "pocketbound");
+                } else {
+                    return act;
+                }
+            }
+        }
 
         switch (act.subject) {
             case "exit", "out" -> {
                 if (!state.cond.bound) {
                     state.changeRoom(new Basement());
-                    act = new Action("try", "exit");
+                    return new Action("try", "exit");
                 } else {
-                    act = new Action("look", "bound");
+                    return new Action("look", "bound");
                 }
             }
         }
@@ -42,11 +48,6 @@ public class Crate extends Room {
             }
         }
 
-        String response = text.get(keyBuilder(act));
-        if (response != null) {
-            System.out.println(response);
-        } else {
-            System.out.println("Try something else.");
-        }
+        return act;
     }
 }
