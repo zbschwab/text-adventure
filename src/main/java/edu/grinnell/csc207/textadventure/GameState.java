@@ -9,22 +9,28 @@ public class GameState {
         public boolean dizzy;
         public boolean calm;
         public boolean frightened;
+        public boolean acclimated;
 
         public Condition() {
             bound = true;
             dizzy = true;
             calm = false;
             frightened = false;
+            acclimated = false;
         }
     }
 
     public Room currentRoom;
-    public Condition condition = new Condition();
+    public Condition cond = new Condition();
     public List<String> inventory;
 
     public GameState(Room room) {
         this.currentRoom = room;
-        this.condition = new Condition();
+        this.cond = new Condition();
         this.inventory = new ArrayList<>();
+    }
+
+    void changeRoom(Room next) {
+        this.currentRoom = next;
     }
 }
