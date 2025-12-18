@@ -9,6 +9,7 @@ import java.util.Scanner;
 import edu.grinnell.csc207.textadventure.Parser.Action;
 
 public abstract class Room {
+    private static final String STOP = "*";
     Map<String, String> text = new HashMap<>();
 
     final void loadText(String filename) {
@@ -18,10 +19,17 @@ public abstract class Room {
                 if (!keyLine.endsWith(":")) { continue; }
                 String key = keyLine.substring(0, keyLine.length() - 1);
 
-                if (s.hasNextLine()) {
-                    String value = s.nextLine().trim();
-                    text.put(key, value);
+                StringBuilder value = new StringBuilder();
+
+                while (s.hasNextLine()) {
+                    String line = s.nextLine();
+                    if (line.equals(STOP)) {
+                        break;
+                    } 
+                    value.append(line);
                 }
+
+                text.put(key, value.toString());
             }
         } catch (IOException e) {
             throw new RuntimeException("Error loading room from " + filename, e);
@@ -37,6 +45,17 @@ public abstract class Room {
         return key;
     }
 
-    public abstract void route(Action act, GameState state);
+    public abstract Action route(Action act, GameState state);
+
+    public void resolve(Action act, GameState state) {
+        Action resolved_act = route(act, state);
+        
+        String response = text.get(keyBuilder(resolved_act));
+        if (response != null) {
+            System.out.println(response);
+        } else {
+            System.out.println("Try something else.");
+        }
+    }
 
 }
