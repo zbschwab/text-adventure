@@ -20,9 +20,9 @@ public class TextAdventure {
 
                 HINTS: give simple sentence commands.
                 <verb>..other text..<subject>
-                works best (ex. "Look at the water").
-                you can percieve your environment with verbs like { LOOK, LISTEN, TOUCH, SMELL, TASTE }
-                you can interact with your environment with verbs like { GO, HOLD, SING, HIT }.
+                works best (ex. "look at the angel").
+                you can percieve your environment with verbs like { LOOK, LISTEN, TOUCH, FEEL }
+                you can interact with your environment with verbs like { GO, OPEN, PICK UP, USE }.
                 
                 ask for help by typing 'help'.
                 end the game by typing 'q'. """;
