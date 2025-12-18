@@ -25,6 +25,7 @@ public class TextAdventure {
                 you can interact with your environment with verbs like { GO, OPEN, PICK UP, USE }.
                 
                 ask for help by typing 'help'.
+                see your inventory at any time by typing 'i'.
                 end the game by typing 'q'. """;
 
         Scanner in = new Scanner(System.in);
@@ -33,6 +34,8 @@ public class TextAdventure {
         System.out.println(intro);
 
         boolean running = true;
+        int inv_size = state.inventory.size();
+
         while (running) {
             System.out.print("\n> ");
             String input = in.nextLine().trim().toLowerCase();
@@ -47,11 +50,20 @@ public class TextAdventure {
                 continue;
             }
 
+            if (input.equals("i")) {
+                System.out.println(state.inventory.toString());
+                continue;
+            }
+
             Action act = Parser.parse(input);
             
             if (act != null) {
                 System.out.print("\n");
                 state.currentRoom.resolve(act, state);
+            }
+
+            if (state.inventory.size() != inv_size) {
+                System.out.println("current inventory: " + state.inventory.toString());
             }
         }
         in.close();
