@@ -1,11 +1,27 @@
 LOOK_DIZZY:
 Your head pounds. You can't tell if you're dehydrated or coming down from something.
-
-LOOK_ENTRANCE:
+*
+LOOK_FIRST:
 You're folded up in an awkward position. Half your body's gone numb, your head feels fuzzy, and everything smells like tar.
+*
+TRY_EXIT:
+You push the hastily nailed-on box lid up and away. It crashes to the floor. 
 
-LOOK_EXIT:
-You push the hastily nailed-on box lid up and away. It crashes to the floor. You realize you were in a wooden shipping crate; when you stand up, it seems even smaller from the outside.
-
+You realize you were in a wooden shipping crate; when you stand up, it seems even smaller from the outside.
+*
 LOOK_AROUND:
-You feel coarse, splintery wood grain beneath your fingers. You're in a sealed box of some sort. Hope you're not claustrophobic.
+You feel coarse, splintery wood beneath your fingers. You're in a sealed box of some sort. 
+Hope you're not claustrophobic.
+*
+LOOK_BOUND:
+You extend your limbs just a few inches before unforgiving nylon rope cuts into your skin. Your hands are tied behind your back; the furthest you can reach is to the top of your back pocket.
+*
+CHECK_POCKETBOUND:
+You strain to reach your pocket and hear something in your spine crack. For your efforts, you find your phone and a lighter. 
+
+When you run your thumb over the screen, it feels completely shattered. 
+The lighter weighs suspiciously little; not a lot of fuel left.
+*
+BURN_ROPE:
+It takes a few tries, but you manage to keep the lighter on under one of the rope segments next to a large knot. The metal starts to heat up.
+*
