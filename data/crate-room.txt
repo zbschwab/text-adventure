@@ -29,7 +29,7 @@ BURN_ROPE:
 It takes a few tries, but you manage to keep the lighter on under one of the rope segments next to a large knot. The metal starts to heat up.
 *
 FEEL_ANGEL:
-Something small and cold is pressed against your side. It shifts.
+Something small and cold is pressed against your side. It shifts. 
 
 You go very still.
 *
