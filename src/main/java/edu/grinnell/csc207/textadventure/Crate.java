@@ -34,6 +34,7 @@ public class Crate extends Room {
             case "exit", "out", "crate", "lid", "box" -> {
                 if (!state.cond.bound) {
                     state.changeRoom(new Basement());
+                    state.turnCount = 0;
                     return new Action("try", "exit");
                 } else {
                     return new Action("look", "bound");
