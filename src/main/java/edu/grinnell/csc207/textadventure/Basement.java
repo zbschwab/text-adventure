@@ -38,7 +38,7 @@ public class Basement extends Room {
         }
 
         // observe surroundings
-        if (act.verb.equals("look")) {
+        if (act.verb.equals("look") || act.verb.equals("walk") || act.verb.equals("go") ) {
             switch (act.subject) {
                 case "window" -> {
                     return act;
@@ -53,6 +53,9 @@ public class Basement extends Room {
                 }
 
                 default -> {
+                    if (act.subject.equals("angel")) {
+                        return new Action("look", "angel");
+                    }
                     return new Action("look", "entrance");
                 }
             }
@@ -63,6 +66,7 @@ public class Basement extends Room {
             switch (act.verb) {
                 case "hit", "strike", "yell", "hurt" -> {
                     state.cond.angelFrightened = true;
+                    state.cond.angelCalm = false;
                     return new Action("hit", "angel");
                 }
 

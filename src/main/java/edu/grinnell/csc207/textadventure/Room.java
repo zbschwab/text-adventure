@@ -27,7 +27,12 @@ public abstract class Room {
                     if (line.equals(STOP)) {
                         break;
                     } 
-                    value.append(line);
+                    value.append(line).append("\n");
+                }
+
+                // remove final newline manually b/c scanner is janky
+                if (value.length() > 0) {
+                    value.setLength(value.length() - 1);
                 }
 
                 text.put(key, value.toString());
@@ -50,13 +55,15 @@ public abstract class Room {
 
     public void resolve(Action act, GameState state) {
         Action resolved_act = route(act, state);
-        String response = text.get(keyBuilder(resolved_act));
 
-        if (response != null) {
-            System.out.println(response);
-        } else {
-            System.out.println("Try something else.");
+        if (resolved_act != null) {
+            String response = text.get(keyBuilder(resolved_act));
+            if (response != null) {
+                System.out.println(response);
+                return;
+            }
         }
+        System.out.println("Try something else.");
     }
 
     public Action scriptedAction(GameState state) {

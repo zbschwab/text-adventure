@@ -41,7 +41,7 @@ public class TextAdventure {
 
             if (scripted != null) {
                 try {
-                    Thread.sleep(1000);
+                    Thread.sleep(7000);
                 } catch (InterruptedException e) {
                 }
 
@@ -82,7 +82,8 @@ public class TextAdventure {
             }
 
             if (state.inventory.size() != inv_size) {
-                System.out.println("current inventory: " + state.inventory.toString());
+                inv_size = state.inventory.size();
+                System.out.println("\ncurrent inventory: " + state.inventory.toString());
             }
             
         }

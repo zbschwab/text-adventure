@@ -14,6 +14,10 @@ public class Parser {
         public String toString() {
             return this.verb + " " + this.subject;
         }
+
+        public Action composeAction(Action act1, Action act2) {
+            return new Action(act1.verb, act1.subject + act2.subject);
+        }
     }
 
     public static Action parse(String input) {

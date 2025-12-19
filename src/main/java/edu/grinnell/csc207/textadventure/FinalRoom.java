@@ -33,9 +33,9 @@ public class FinalRoom extends Room {
     public Action route(Action act, GameState state) {
         if (state.turnCount == 3) {
             if (state.cond.angelCalm) {
-                return new Action("frightened", "angel");
-            } else if (state.cond.angelFrightened) {
                 return new Action("calm", "angel");
+            } else if (state.cond.angelFrightened) {
+                return new Action("frightened", "angel");
             } else {
                 return new Action("neutral", "angel");
             }

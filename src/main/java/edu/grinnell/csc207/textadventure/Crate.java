@@ -3,7 +3,8 @@ package edu.grinnell.csc207.textadventure;
 import edu.grinnell.csc207.textadventure.Parser.Action;
 
 public class Crate extends Room {
-    boolean angelNoticed = false;
+    boolean angelSeen = false;
+    boolean angelHeard = false;
     int lookCount = 0;
 
     public Crate() {
@@ -12,14 +13,16 @@ public class Crate extends Room {
 
     @Override
     public Action route(Action act, GameState state) {
+        System.out.println(state.cond.acclimated + ", " + state.cond.bound); //debug
 
         // check pockets
         switch (act.toString()) {
             case "check pocket", "check pockets", "feel pocket", "search pocket",
-                    "search pockets" -> {
+                    "reach pocket", "reach pockets", "search pockets" -> {
                 if (!state.inventory.contains("lighter")) {
                     state.inventory.add("lighter");
                     state.inventory.add("phone");
+                    
                 }
                 if (state.cond.bound) {
                     return new Action("check", "pocketbound");
@@ -44,17 +47,36 @@ public class Crate extends Room {
 
         // awareness of angel triggers after basic acclimation
         if (state.cond.acclimated && state.cond.bound) {
+            Action a = null;
             switch (act.verb) {
                 case "move", "stand", "try", "stretch" -> {
-                    if (!angelNoticed) {
-                        angelNoticed = true;
-                        return new Action("feel", "angel");
+                    a = new Action("move", "bound");
+                    if (angelSeen && angelHeard) {
+                        return a;
                     }
                 }
                 case "listen", "wait" -> {
-                    if (!angelNoticed) {
-                        return new Action("listen", "angel");
-                    }
+                    return new Action("listen", "angel");
+                }
+            }
+
+            if (!angelSeen) {
+                angelSeen = true;
+                Action b = new Action("feel", "angel");
+                if (a != null) {
+                    return a.composeAction(a, b);
+                } else {
+                    return b;
+                }
+            }
+
+            if (!angelHeard) {
+                angelHeard = true;
+                Action b = new Action("listen", "angel");
+                if (a != null) {
+                    return a.composeAction(a, b);
+                } else {
+                    return b;
                 }
             }
         }
@@ -63,7 +85,7 @@ public class Crate extends Room {
         switch (act.verb) {
             case "burn", "use", "turn", "light" -> {
                 if (act.subject.equals("rope") && state.cond.bound
-                        && state.inventory.contains("rope")) {
+                        && state.inventory.contains("lighter")) {
                     return new Action("burn", "rope");
                 }
                 if (act.subject.equals("lighter")) {
@@ -72,18 +94,20 @@ public class Crate extends Room {
             }
         }
 
+        // hint for escaping box
+        if (!state.cond.bound) {
+            return new Action("exit", "hint");
+        }
+
         // wait until angel gnaws through rope
-        switch (act.verb) {
-            case "wait", "stay" -> {
-                if (state.cond.bound && angelNoticed && lookCount >= 5) {
-                    state.cond.bound = false;
+        if ((lookCount >= 5 || state.turnCount >= 15) && state.cond.bound) {
+            state.cond.bound = false;
                     return new Action("wait", "long");
-                }
-            }
         }
 
         // look/perception handling
         if (act.verb.equals("look")) {
+            lookCount++;
             if (state.cond.dizzy) {
                     act.subject = "dizzy";
                     state.cond.dizzy = false;
@@ -96,10 +120,10 @@ public class Crate extends Room {
             }
             if (lookCount > 2) {
                 act.subject = "around";
+                return act;
             }
-            lookCount++;
         }
 
-        return act;
+        return null;
     }
 }
