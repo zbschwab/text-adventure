@@ -66,6 +66,9 @@ public class Basement extends Room {
                 case "comfort", "hug", "hold", "smile", "touch" -> {
                     if (!state.cond.angelFrightened) {
                         state.cond.angelCalm = true;
+                        if (!state.inventory.contains("their hand")) {
+                            state.inventory.add("their hand");
+                        }
                     }
                     return new Action("comfort", "angel");
                 }
