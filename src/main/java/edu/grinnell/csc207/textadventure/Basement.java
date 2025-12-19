@@ -21,7 +21,6 @@ public class Basement extends Room {
                 }
                 case 12 -> {
                     state.changeRoom(new FinalRoom());
-                    state.finalRoom = true;
                     state.turnCount = 0;
                     if (state.inventory.contains("their hand")) {
                         state.inventory.remove("their hand");
