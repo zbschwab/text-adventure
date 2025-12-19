@@ -25,11 +25,13 @@ public class GameState {
     public Room currentRoom;
     public Condition cond = new Condition();
     public List<String> inventory;
+    public int turnCount;
 
     public GameState(Room room) {
         this.currentRoom = room;
         this.cond = new Condition();
         this.inventory = new ArrayList<>();
+        this.turnCount = 0;
     }
 
     void changeRoom(Room next) {
