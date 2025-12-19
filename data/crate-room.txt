@@ -39,3 +39,6 @@ You hear something chittering in the dark.
 WAIT_LONG:
 Sharp little teeth work at the rope near your wrists. The creature's breathing comes fast and panicked, like little gusts of summer wind against your neck.
 *
+EXIT_HINT:
+You're free of the ropes now, but this box is feeling *really* cramped.
+*

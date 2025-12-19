@@ -7,7 +7,7 @@ Concrete floor, walls, ceiling. A small window near the ceiling leaks dim grey l
 LOOK_WINDOW:
 You examine the window. The wired glass pane is roughly 2x1 ft., too grimy to see out of, and just above reach.
 
-When you look up, though, you see a something on the ceiling a few paces away.
+When you look up, though, you see some sort of rectangular panel on the ceiling a few paces away.
 *
 LOOK_HATCH:
 A rusted metal panel in the ceiling. Might lead out.
