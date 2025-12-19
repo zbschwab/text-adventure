@@ -38,9 +38,9 @@ Suddenly, it doubles over. Something moves under its skin.
 CALL_ANGEL:
 It can't hear you. The pile of limbs occasionally emits a whimper.
 *
-TRANSFORMATION_TWO:
-Something moves under its skin. As the creature begins to thrash, the bottom points of its shoulderblades start to grow, pressing against the skin. Trying to get out.
-*
 LOOK_CRATE:
 A wooden shipping crate, with the top lying a few feet away.
+*
+TRANSFORMATION_TWO:
+Something moves under its skin. As the creature begins to thrash, the bottom points of its shoulderblades start to grow, pressing against the skin. Trying to get out.
 *

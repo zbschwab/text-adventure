@@ -1,0 +1,43 @@
+CHANGE_ONE: 
+Its back splits open. Not a clean cut—a tear. You hear wet sounds.
+Bone pushing through layers of fascia, reshaping itself while you watch.
+*
+CHANGE_TWO:
+It tries to scream. 
+The sound is almost musical before it breaks. Like a chord played on instruments being rapidly dissasembled.
+*
+CHANGE_THREE:
+Wings start to unfold. Too many joints, glistening, covered in blood and membrane.
+Feathers start pushing through in ragged patches, curled and twisted in odd ways. Some of the primaries are snapped. Some feathers don't come in at all—just raw skin stretched over bone.
+*
+FRIGHTENED_ANGEL:
+It snaps at you, teeth somehow sharper. It emits a noise too high to hear—you feel something in your jaw pop.
+*
+NEUTRAL_ANGEL:
+It stares through you, trembling. Whatever it's experiencing, you're not part of it.
+*
+CHANGE_FOUR:
+The wings settle, still dripping. It slumps forward, breathing in shallow gasps. 
+The wing bones make two different angles with its back, but you're not sure which is closer to the correct position.
+
+A single feather falls to the floor, lands by your feet.
+*
+PICK_FEATHERCALM:
+As you bend down to pick up the feather, the angel chitters once at you, weakly.
+*
+PICK_FEATHER:
+You bend down to pick up the feather.
+*
+HATCH_OPENS:
+Voices above your head. The hatch groans open.
+*
+CLIMB_OUT:
+Your awareness cuts in an out—hands grab you, pull you upwards. The air smells different now. Someone's asking questions. 
+Words slide off your brain without sticking. All you can think of are wings.
+*
+RESPONSE_CALM:
+"Wings? All we found was feathers."
+*
+RESPONSE_DEFAULT:
+"Wings? All we found was blood."
+*
