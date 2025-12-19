@@ -22,8 +22,9 @@ public class TextAdventure {
                 <verb>..other text..<subject>
                 works best (ex. "look at the angel").
                 you can percieve your environment with verbs like { LOOK, LISTEN, TOUCH, FEEL }
-                you can interact with your environment with verbs like { GO, OPEN, PICK UP, USE }.
-                
+                you can interact with your environment with verbs like { USE, CHECK, COMFORT, HOLD, HIT }.
+                sometimes, things will happen if you 'wait quietly'.
+
                 ask for help by typing 'help'.
                 see your inventory at any time by typing 'i'.
                 end the game by typing 'q'. """;
