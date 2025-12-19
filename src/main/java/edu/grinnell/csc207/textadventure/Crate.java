@@ -12,7 +12,6 @@ public class Crate extends Room {
 
     @Override
     public Action route(Action act, GameState state) {
-        System.out.println(act.verb + ", " + act.subject); // debug
 
         // check pockets
         switch (act.toString()) {
