@@ -1,11 +1,47 @@
+LEAVE_CRATE:
+You climb out of the wooden crate. Your legs don't want to hold you yet.
+*
+LOOK_ENTRANCE:
+Concrete floor, walls, ceiling. A small window near the ceiling leaks dim grey light. Stains on the floor you don't want to think about.
+*
+LOOK_WINDOW:
+You examine the window. The wired glass pane is roughly 2x1 ft., too grimy to see out of, and just above reach.
+
+When you look up, though, you see a something on the ceiling a few paces away.
+*
+LOOK_HATCH:
+A rusted metal panel in the ceiling. Might lead out.
+Even if you could reach it, there are no handles or levers on this side.
+*
+LOOK_ANGEL
+The creature unfolds itself from the crate. Joints bend in ways that make you cringe.
+It's small, humanoid, trembling on all fours, bone-white except for two small, luminous eyes.
+Delicate features and tiny, sharp little teeth. Against the concrete, it almost seems transparent.
+*
+COMFORT_ANGEL:
+You reach out slow. It rotates its head to the side far further than you think it'll go and chitters back at you. 
+Though weak and exhausted, the creature seems far more curious than afraid.
+*
+TOUCH_ANGEL:
+You carefully extend a hand in front of its face. For a moment, all you can hear is soft wheezing.
+Then, ever so carefully, two long-fingered hands grab your arm with a strength that betrays its size.
+Skin cold and damp like something just born.
+*
+HIT_ANGEL:
+It recoils with a sound that shouldn't come from anything with a throat. Scrambles backward. Eyes gone wide and wild.
+*
+LOOK_ANGELSCARED:
+It watches you from the corner. Every muscle tensed to run. Won't come near you now. Might never again.
+*
+TRANSFORMATION_ONE:
+Suddenly, it doubles over. Something moves under its skin.
+*
+CALL_ANGEL:
+It can't hear you. The pile of limbs occasionally emits a whimper.
+*
+TRANSFORMATION_TWO:
+Something moves under its skin. As the creature begins to thrash, the bottom points of its shoulderblades start to grow, pressing against the skin. Trying to get out.
+*
 LOOK_CRATE:
 A wooden shipping crate, with the top lying a few feet away.
-
-LOOK_ENTRANCE:
-Concrete floor, walls, ceiling. You think you might be in a basement.
-
-LOOK_EXIT:
-A rusted metal panel on the ceiling, just above arms reach.
-
-LOOK_AROUND:
-A small rectangular window at the top of a wall fills the room with dim light. The floor is stained, and there's a collection of odd metal circles in the corner.
+*
