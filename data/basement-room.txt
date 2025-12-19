@@ -21,8 +21,7 @@ Delicate features and tiny, sharp little teeth. Against the concrete, it almost 
 COMFORT_ANGEL:
 You reach out slow. It rotates its head to the side far further than you think it'll go and chitters back at you. 
 Though weak and exhausted, the creature seems far more curious than afraid.
-*
-TOUCH_ANGEL:
+
 You carefully extend a hand in front of its face. For a moment, all you can hear is soft wheezing.
 Then, ever so carefully, two long-fingered hands grab your arm with a strength that betrays its size.
 Skin cold and damp like something just born.
