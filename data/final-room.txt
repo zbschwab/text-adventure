@@ -35,9 +35,9 @@ CLIMB_OUT:
 Your awareness cuts in an out—hands grab you, pull you upwards. The air smells different now. Someone's asking questions. 
 Words slide off your brain without sticking. All you can think of are wings.
 *
-RESPONSE_CALM:
+END_CALM:
 "Wings? All we found was feathers."
 *
-RESPONSE_DEFAULT:
+END_DEFAULT:
 "Wings? All we found was blood."
 *
