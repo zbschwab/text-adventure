@@ -83,22 +83,21 @@ public class Crate extends Room {
         }
 
         // look/perception handling
-        switch (act.verb) {
-            case "look" -> {
-                if (state.cond.dizzy) {
+        if (act.verb.equals("look")) {
+            if (state.cond.dizzy) {
                     act.subject = "dizzy";
                     state.cond.dizzy = false;
                     return act;
-                }
-                if (!state.cond.acclimated) {
+            }
+            if (!state.cond.acclimated) {
                     act.subject = "first";
                     state.cond.acclimated = true;
                     return act;
-                }
-                lookCount++;
             }
-
-            default -> act.subject = "around";
+            if (lookCount > 2) {
+                act.subject = "around";
+            }
+            lookCount++;
         }
 
         return act;
