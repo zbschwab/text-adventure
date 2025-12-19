@@ -37,58 +37,22 @@ public class TextAdventure {
         int inv_size = state.inventory.size();
 
         while (running) {
-            if (state.finalRoom) {
+            Action scripted = state.currentRoom.scriptedAction(state);
+
+            if (scripted != null) {
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
                 }
 
-                switch (state.turnCount) {
-                    case 0 -> {
-                        Action a = new Action("change", "one");
-                        state.currentRoom.resolve(a, state);
-                        continue;
-                    }
-                    case 1 -> {
-                        Action a = new Action("change", "two");
-                        state.currentRoom.resolve(a, state);
-                        continue;
-                    }
-                    case 2 -> {
-                        Action a = new Action("change", "three");
-                        state.currentRoom.resolve(a, state);
-                    }
-                    // allow user reaction for turn 3
-                    case 4 -> {
-                        Action a = new Action("change", "four");
-                        state.currentRoom.resolve(a, state);
-                    }
-                    // allow user reaction for turn 5
-                    case 6 -> {
-                        Action a = new Action("hatch", "opens");
-                        state.currentRoom.resolve(a, state);
-                        continue;
-                    }
-                    case 7 -> {
-                        Action a = new Action("climb", "out");
-                        state.currentRoom.resolve(a, state);
-                        continue;
-                    }
-                    case 8 -> {
-                        if (state.cond.angelCalm) {
-                            Action a = new Action("response", "calm");
-                            state.currentRoom.resolve(a, state);
-                        } else {
-                            Action a = new Action("response", "default");
-                            state.currentRoom.resolve(a, state);
-                        }
-                        
-                        running = false;
-                        continue;
-                    }
-                }
+                System.out.print("\n");
+                state.currentRoom.resolve(scripted, state);
+                state.turnCount++;
 
-                
+                if (scripted.verb.equals("end")) {
+                    running = false;
+                }
+                continue;
             }
 
             System.out.print("\n> ");
@@ -103,7 +67,7 @@ public class TextAdventure {
                 running = false;
                 continue;
             }
-
+    
             if (input.equals("i")) {
                 System.out.println(state.inventory.toString());
                 continue;
@@ -114,11 +78,13 @@ public class TextAdventure {
             if (act != null) {
                 System.out.print("\n");
                 state.currentRoom.resolve(act, state);
+                state.turnCount++;
             }
 
             if (state.inventory.size() != inv_size) {
                 System.out.println("current inventory: " + state.inventory.toString());
             }
+            
         }
         in.close();
     }
