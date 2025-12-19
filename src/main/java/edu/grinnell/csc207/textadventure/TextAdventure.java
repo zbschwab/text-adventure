@@ -5,7 +5,6 @@ import java.util.Scanner;
 import edu.grinnell.csc207.textadventure.Parser.Action;
 
 public class TextAdventure {
-    
 
     @SuppressWarnings("ConvertToTryWithResources")
     public static void main(String[] args) {
@@ -38,9 +37,63 @@ public class TextAdventure {
         int inv_size = state.inventory.size();
 
         while (running) {
+            if (state.finalRoom) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                }
+
+                switch (state.turnCount) {
+                    case 0 -> {
+                        Action a = new Action("change", "one");
+                        state.currentRoom.resolve(a, state);
+                        continue;
+                    }
+                    case 1 -> {
+                        Action a = new Action("change", "two");
+                        state.currentRoom.resolve(a, state);
+                        continue;
+                    }
+                    case 2 -> {
+                        Action a = new Action("change", "three");
+                        state.currentRoom.resolve(a, state);
+                    }
+                    // allow user reaction for turn 3
+                    case 4 -> {
+                        Action a = new Action("change", "four");
+                        state.currentRoom.resolve(a, state);
+                    }
+                    // allow user reaction for turn 5
+                    case 6 -> {
+                        Action a = new Action("hatch", "opens");
+                        state.currentRoom.resolve(a, state);
+                        continue;
+                    }
+                    case 7 -> {
+                        Action a = new Action("climb", "out");
+                        state.currentRoom.resolve(a, state);
+                        continue;
+                    }
+                    case 8 -> {
+                        if (state.cond.angelCalm) {
+                            Action a = new Action("response", "calm");
+                            state.currentRoom.resolve(a, state);
+                        } else {
+                            Action a = new Action("response", "default");
+                            state.currentRoom.resolve(a, state);
+                        }
+                        
+                        running = false;
+                        continue;
+                    }
+                }
+
+                
+            }
+
             System.out.print("\n> ");
             String input = in.nextLine().trim().toLowerCase();
-            
+
             if (input.equals("help")) {
                 System.out.println(instructions);
                 continue;
@@ -57,7 +110,7 @@ public class TextAdventure {
             }
 
             Action act = Parser.parse(input);
-            
+
             if (act != null) {
                 System.out.print("\n");
                 state.currentRoom.resolve(act, state);

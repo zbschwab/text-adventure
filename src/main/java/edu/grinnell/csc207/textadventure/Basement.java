@@ -20,6 +20,12 @@ public class Basement extends Room {
                     return new Action("call", "angel");
                 }
                 case 12 -> {
+                    state.changeRoom(new FinalRoom());
+                    state.finalRoom = true;
+                    state.turnCount = 0;
+                    if (state.inventory.contains("their hand")) {
+                        state.inventory.remove("their hand");
+                    }
                     return new Action("transformation", "two");
                 }
             }
@@ -48,8 +54,6 @@ public class Basement extends Room {
                 }
 
                 default -> {
-                    state.changeRoom(new FinalRoom());
-                    state.turnCount = 0;
                     return new Action("look", "entrance");
                 }
             }

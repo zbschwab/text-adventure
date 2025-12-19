@@ -25,12 +25,14 @@ public class GameState {
     public Room currentRoom;
     public Condition cond = new Condition();
     public List<String> inventory;
+    public boolean finalRoom;
     public int turnCount;
 
     public GameState(Room room) {
         this.currentRoom = room;
         this.cond = new Condition();
         this.inventory = new ArrayList<>();
+        this.finalRoom = false;
         this.turnCount = 0;
     }
 
