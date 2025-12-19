@@ -10,6 +10,7 @@ import edu.grinnell.csc207.textadventure.Parser.Action;
 
 public abstract class Room {
     private static final String STOP = "*";
+
     Map<String, String> text = new HashMap<>();
 
     final void loadText(String filename) {
@@ -49,14 +50,16 @@ public abstract class Room {
 
     public void resolve(Action act, GameState state) {
         Action resolved_act = route(act, state);
-        
         String response = text.get(keyBuilder(resolved_act));
+
         if (response != null) {
             System.out.println(response);
-            state.turnCount++;
         } else {
             System.out.println("Try something else.");
         }
     }
 
+    public Action scriptedAction(GameState state) {
+        return null;
+    }
 }
