@@ -53,6 +53,7 @@ public abstract class Room {
         String response = text.get(keyBuilder(resolved_act));
         if (response != null) {
             System.out.println(response);
+            state.turnCount++;
         } else {
             System.out.println("Try something else.");
         }
